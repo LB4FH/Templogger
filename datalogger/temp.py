@@ -15,11 +15,13 @@ import datetime
 import json
 
 DT = datetime.datetime.now().isoformat()
+date = datetime.date.today()
+filename = "/home/pi/logs/{0}.log".format(date)
 
 humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 4)
 
 if humidity is not None and temperature is not None:
-    with open ("/home/pi/temp.log","a") as f:
+    with open (filename,"a") as f:
         f.write("{0};{1:0.1f};{2:0.1f}\n".format(DT, temperature, humidity))
     data = {}
     data['last'] = []
